@@ -60,27 +60,6 @@ import sys
 # print_top("mytext.txt")
 
 
-def print_words(filename):
-    # obtain dictionary from file
-    words_dic=make_dictionnary("mytext.txt")
-    # turn into list of pairs, sorted by alphabetical order
-    words_list=sorted([[k,v] for k, v, in words_dic.items()])
-    # print
-    for word in words_list:
-        print(word[0], word[1])
-
-
-def print_top(filename):
-    # obtain dictionary from file
-    words_dic=make_dictionnary("mytext.txt")
-    # turn into list of pairs
-    words_list=[[k,v] for k, v, in words_dic.items()]
-    # sort by frequence of words, keeping only the first 20 entries
-    top_list=[t[::-1] for t in sorted([t[::-1] for t in words_list], reverse = True)][:20]
-    # print
-    for word in top_list:
-        print(word[0], word[1])
-
 
 def make_dictionnary(filename):
     full_text = ''
@@ -107,6 +86,26 @@ def make_dictionnary(filename):
     return word_dict
 
 
+def print_words(filename):
+    # obtain dictionary from file
+    words_dic=make_dictionnary("mytext.txt")
+    # turn into list of pairs, sorted by alphabetical order
+    words_list=sorted([[k,v] for k, v, in words_dic.items()])
+    # print
+    for word in words_list:
+        print(word[0], word[1])
+
+
+def print_top(filename):
+    # obtain dictionary from file
+    words_dic=make_dictionnary("mytext.txt")
+    # turn into list of pairs
+    words_list=[[k,v] for k, v, in words_dic.items()]
+    # sort by frequence of words, keeping only the first 20 entries
+    top_list=[t[::-1] for t in sorted([t[::-1] for t in words_list], reverse = True)][:20]
+    # print
+    for word in top_list:
+        print(word[0], word[1])
 
 
 # This basic command line argument parsing code is provided and
