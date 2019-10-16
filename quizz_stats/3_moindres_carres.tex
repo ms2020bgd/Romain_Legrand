@@ -1,0 +1,59 @@
+\vspace{5mm}
+
+{\fontsize{12pt}{22pt} \textbf{3. Moindres carrés:}\par}
+
+\vspace{5mm}
+
+10)  On suppose que X est de rang plein et on note $\hat{\theta}$ l’estimateur OLS. On note $\tilde{X}=(X_1,\hdots,X_p)$.On change l’échelle d’une des variables: $X_k$ est remplacé par $X_k b$, où $b>0$. \\
+a) Soit $X_b=(1, X_1,\hdots, X_k b, \hdots, X_p)$. Montrer que $X_b = X D$ où $D$ est une matrice diagonale que l’on précisera. \\
+On utilise simplement la définition de $X_b$ pour obtenir: \\
+$X_b 
+= \left( \begin{matrix} 1 & X_1 & \hdots & X_k b & \hdots & X_p \end{matrix} \right)
+= \left( \begin{matrix} 1 \times 1 & 1 \times X_1 & \hdots & b \times X_k & \hdots & 1 \times X_p \end{matrix} \right)$ \\
+$ \left( \begin{matrix} 1 & X_1 & \hdots & X_k & \hdots & X_p \end{matrix} \right) \times
+\left( \begin{matrix} 1 & & & & & \\ & 1 & & & & \\ & & \ddots & & & \\ & & & b & & \\ & & & & \ddots & \\ & & & & & 1 \end{matrix} \right)
+= X D$ \\ \\
+$D$ est donc la matrice identité de dimension $p+1$ dont l'entrée diagonale $k+1$ est remplacée par $b$. \\
+b)  Soit $\hat{\theta}_{b,n}$ l’estimateur OLS associé à $X_b$. Exprimer $\hat{\theta}_{b,n}$ en fonction de $\hat{\theta}_{n}$ et de $D$. \\
+Par les équations normales, l'estimateur OLS $\hat{\theta}_{b,n}$ est égal à: \\
+$\hat{\theta}_{b,n}
+=(X_b^T X_b)^{-1}(X_b^T y)
+=[(X D)^T (X D)]^{-1}[(X D)^T y]
+=[D^T X^T X D]^{-1}[D^T X^T y]$ \\
+$=[D^{-1} (X^T X)^{-1} (D^T)^{-1}] \ [D^T X^T y]
+=D^{-1} (X^T X)^{-1} X^T y
+=D^{-1} \hat{\theta}_{n}$ \\
+Autrement dit, l'estimateur $\hat{\theta}_{b,n}$ est égal à l'estimateur $\hat{\theta}_{n}$ dont le coefficient $k+1$ a été multiplié par $1/b$. \\
+c) Donner la variance de $\hat{\theta}_{b,n}$. \\
+On utilise simplement les propriétés de la variance (et le fait que $D$ est diagonale) pour obtenir: \\
+$Var(\hat{\theta}_{b,n})=Var(D^{-1} \hat{\theta}_{n})=(D^{-1})^2 Var(\hat{\theta}_{n})=\sigma^2 (D^{-1})^2 (X^T X)^{-1}$ \\
+d) La prédiction donnée par le modèle est: \\
+$\hat{y}_b
+=X_b \hat{\theta}_{b,n}
+=(X D) (D^{-1} \hat{\theta}_{n})
+=X \hat{\theta}_{n}
+=\hat{y}$ \\
+Autrement dit, la prédiction n'est elle pas affectée par le changement d'échelle d'une des variables. \vspace{2mm}
+
+11) Donner une formule explicite du problème $argmin_\theta \ \frac{1}{2} (y-X \theta)^T \Omega (y-X \theta)$ pour une matrice $\Omega=diag(w_1, \hdots, w_n)$ définie positive, dans le cas où $X$ est de plein rang. \\
+On commence par développer la forme quadratique: \\
+$\frac{1}{2} (y-X \theta)^T \Omega (y-X \theta)
+=\frac{1}{2} \left[ y^T \Omega y + \theta^T X^T \Omega X \theta - 2 \theta^T X^T \Omega y \right]$ \\
+(où pour obtenir le terme $2 \theta^T X^T \Omega y$ on a utilisé le fait qu'un scalaire est égal à sa transposée, et que $\Omega$ est symétrique). \\
+Pour trouver l'argmin, on utilisera les règles suivantes de dérivées matricielles:\\
+- Si $a$ et $b$ sont des vecteurs, on a: $\frac{\partial b^T a}{\partial b} = a$. Cela implique que: $\frac{\partial 2 \theta^T X^T \Omega y}{\partial \theta} = 2 X^T \Omega y$. \\
+- Si $A$ est une matrice symétrique et $b$ un vecteur, on a: $\frac{\partial b^T A b}{\partial b} = 2 A b$. Cela implique que: $\frac{\partial \theta^T X^T \Omega X \theta}{\partial \theta} = 2 X^T \Omega X \theta$. \\
+On conclut que: 
+\begin{lflalign}
+& \ \frac{\partial }{\partial \theta}\left( \ \frac{1}{2} (y-X \theta)^T \Omega (y-X \theta) \right)=0 \nonumber \\
+\Leftrightarrow \ & \ \frac{\partial }{\partial \theta} \left( \frac{1}{2} \left[ y^T \Omega y + \theta^T X^T \Omega X \theta - 2 \theta^T X^T \Omega y \right] \right)=0 \nonumber \\
+\Leftrightarrow \ & \ \frac{1}{2} \left( 2 X^T \Omega y - 2 X^T \Omega X \theta \right) = 0 \nonumber \\
+\Leftrightarrow \ & \ X^T \Omega y - X^T \Omega X \theta = 0 \nonumber \\
+\Leftrightarrow \ & \ X^T \Omega X \theta = X^T \Omega y \nonumber \\
+\Leftrightarrow \ & \  \hat{\theta} = (X^T \Omega X)^{-1} (X^T \Omega y) \nonumber
+\end{lflalign}
+
+
+
+
+
